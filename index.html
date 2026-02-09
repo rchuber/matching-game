@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Word Match Adventure</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="hero__tag">Reading Match Adventure</p>
+      <h1>Word Match Adventure</h1>
+      <p class="hero__lead">
+        Build a custom word deck from a huge syllable-based list, then play a colorful
+        matching game that keeps learners focused and excited.
+      </p>
+      <div class="hero__actions">
+        <button class="pill" data-tab-target="play">Play Game</button>
+        <button class="pill pill--outline" data-tab-target="admin">Admin Mode</button>
+      </div>
+    </div>
+    <div class="hero__mascot" aria-hidden="true">🧠✨</div>
+  </header>
+
+  <main class="app">
+    <section class="tabs">
+      <button class="tab is-active" data-tab="play">Play</button>
+      <button class="tab" data-tab="admin">Admin</button>
+      <button class="tab" data-tab="about">How It Works</button>
+    </section>
+
+    <section class="panel is-active" id="panel-play" aria-labelledby="play">
+      <div class="panel__grid">
+        <div class="card config">
+          <h2>Game Setup</h2>
+          <p>Select how many pairs to play and start the round.</p>
+          <div class="config__row">
+            <label for="pairCount">Pairs</label>
+            <input type="range" id="pairCount" min="2" max="12" value="6" />
+            <span id="pairCountValue">6</span>
+          </div>
+          <div class="config__row">
+            <label class="toggle">
+              <input type="checkbox" id="readMode" />
+              <span>Read Mode (speaks words aloud)</span>
+            </label>
+          </div>
+          <div class="config__row">
+            <label class="toggle">
+              <input type="checkbox" id="twoPlayerMode" checked />
+              <span>Two Player Mode</span>
+            </label>
+          </div>
+          <div class="config__actions">
+            <button class="primary" id="startGame">Start Game</button>
+            <button class="ghost" id="shuffleGame">Shuffle Cards</button>
+          </div>
+          <p class="hint" id="selectionHint"></p>
+        </div>
+
+        <div class="card scoreboard">
+          <div class="scoreboard__header">
+            <h2>Scoreboard</h2>
+            <span id="turnIndicator">Player 1 Turn</span>
+          </div>
+          <div class="scoreboard__grid">
+            <div class="score">
+              <h3>Player 1</h3>
+              <p id="playerOneScore">0</p>
+            </div>
+            <div class="score">
+              <h3>Player 2</h3>
+              <p id="playerTwoScore">0</p>
+            </div>
+            <div class="score">
+              <h3>Matches</h3>
+              <p id="matchCount">0</p>
+            </div>
+            <div class="score">
+              <h3>Deck Words</h3>
+              <p id="deckCount">0</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card board">
+          <h2>Match the Cards!</h2>
+          <div class="board__grid" id="gameBoard"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-admin" aria-labelledby="admin">
+      <div class="panel__grid">
+        <div class="card admin__filters">
+          <h2>Admin Mode: Build the Word Deck</h2>
+          <p>
+            Search thousands of words, filter by syllable type, and quickly check the ones
+            you want. Your selections are saved automatically for the next game.
+          </p>
+          <div class="filters">
+            <label>
+              Search
+              <input type="search" id="wordSearch" placeholder="Type to filter words" />
+            </label>
+            <label>
+              Syllable Type
+              <select id="syllableFilter">
+                <option value="all">All</option>
+                <option value="closed">Closed</option>
+                <option value="vce">VCe</option>
+                <option value="open">Open</option>
+                <option value="vowel-team">Vowel Team</option>
+                <option value="r-controlled">R-Controlled</option>
+                <option value="consonant-le">Consonant-le</option>
+              </select>
+            </label>
+            <label>
+              Word Length
+              <select id="lengthFilter">
+                <option value="all">All</option>
+                <option value="3">3 letters</option>
+                <option value="4">4 letters</option>
+                <option value="5">5 letters</option>
+                <option value="6">6 letters</option>
+              </select>
+            </label>
+          </div>
+          <div class="filters__actions">
+            <button class="primary" id="selectFiltered">Select Filtered</button>
+            <button class="ghost" id="clearSelections">Clear All</button>
+          </div>
+          <div class="summary">
+            <div>
+              <strong id="filteredCount">0</strong>
+              <span>Filtered words</span>
+            </div>
+            <div>
+              <strong id="selectedCount">0</strong>
+              <span>Selected for game</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card admin__list">
+          <div class="admin__header">
+            <h3>Word List</h3>
+            <span class="chip" id="listStatus">Ready</span>
+          </div>
+          <div class="wordlist" id="wordList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-about" aria-labelledby="about">
+      <div class="card about">
+        <h2>Why This Helps Teachers</h2>
+        <p>
+          This matching game is built around six common syllable types (closed, VCe, open,
+          vowel teams, r-controlled, and consonant-le). Teachers can quickly select words
+          for a learner’s current skill level, then play a high-energy game that keeps
+          attention focused on decoding the same words.
+        </p>
+        <ul>
+          <li>Customize decks from a large, searchable word list.</li>
+          <li>Play in solo or two-player mode with instant feedback.</li>
+          <li>Optional read-aloud support for emerging readers.</li>
+          <li>Runs entirely in the browser for GitHub Pages hosting.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made for joyful, research-aligned reading practice.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
